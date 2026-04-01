@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core import views # Aula 02-EX
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('eventos/<str:titulo_evento>/', views.detalhes_evento),
 ]
