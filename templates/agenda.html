@@ -1,0 +1,13 @@
+<!-- Aula 3: Estendendo o template model-page.html para reutilizar o código do cabeçalho e rodapé da página -->
+{% extends "model-page.html" %}
+
+<!-- Aula 3: Preenchendo o bloco de conteúdo definido no template model-page.html -->
+{% block content %}
+    <h2>Agendamentos</h2>
+
+    <ul style="font-size: 18px">
+    {% for evento in eventos %} <!-- Aula 3: Percorrendo a lista de eventos e exibindo o título e a data de cada um -->
+        <li>{{ evento.titulo }} - {{ evento.get_data_evento }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

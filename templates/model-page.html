@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% include "model-header.html" %} <!-- Aula 3: Incluindo o arquivo model-header.html para reutilizar o código do cabeçalho da página -->
+</head>
+<body>
+    <!-- Aula 3: Criando um bloco de conteúdo para ser preenchido pelas páginas que herdam esse template -->
+    {% block content %} {% endblock %}
+    <!-- Aula 3: Incluindo o arquivo model-footer.html para reutilizar o código do rodapé da página -->
+    {% include "model-footer.html" %} 
+</body>
+</html>
