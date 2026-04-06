@@ -17,3 +17,6 @@ class Evento(models.Model): # Aula 02
     # O método __str__ é utilizado para exibir o nome do evento no admin do Django
     def __str__(self): # Aula 02
         return self.titulo
+    
+    def get_data_evento(self):
+        return self.data_evento.strftime('%d/%m/%Y - %H:%M Hrs')
