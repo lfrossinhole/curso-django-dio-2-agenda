@@ -18,6 +18,7 @@ def detalhes_evento(request, titulo_evento): # Aula 02-EX
                         f'<p>Descrição: {evento.descricao}</p>'
                         f'<p>Data do Evento: {evento.data_evento}</p>'
                         f'<p>Data de Criação: {evento.data_criacao}</p>'
+                        f'<p>Local do Evento: {evento.local}</p>'
                         f'<p>Usuário: {evento.usuario.username}</p>'
                         )
 
@@ -78,6 +79,7 @@ def submit_evento(request): # Aula 04: Criando a view para processar o cadastro 
         titulo = request.POST.get('titulo')
         descricao = request.POST.get('descricao')
         data_evento = request.POST.get('data_evento')
+        local = request.POST.get('local')
         usuario = request.user # Aula 04: Obtendo o usuário logado para associar o evento a ele
 
         # Método 1: Criando o evento e salvando em duas etapas
@@ -88,6 +90,7 @@ def submit_evento(request): # Aula 04: Criando a view para processar o cadastro 
         Evento.objects.create(titulo=titulo, 
                             descricao=descricao, 
                             data_evento=data_evento, 
+                            local=local, 
                             usuario=usuario)
 
     return redirect('/')
