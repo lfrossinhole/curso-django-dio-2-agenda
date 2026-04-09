@@ -68,3 +68,26 @@ def lista_eventos(request): # Aula 03: Obtendo todos os eventos do banco de dado
     dados = {'eventos': lista_eventos}
     return render(request, 'agenda.html', dados)
 
+@login_required(login_url='/login/') # Aula 04: Protegendo a view de cadastro de eventos para que apenas usuários logados possam acessá-la
+def evento(request): # Aula 04: Criando a view para a página de cadastro de eventos
+    return render(request, 'evento.html')
+
+@login_required(login_url='/login/') # Aula 04: Protegendo a view de processamento de cadastro de eventos para que apenas usuários logados possam acessá-la
+def submit_evento(request): # Aula 04: Criando a view para processar o cadastro de eventos
+    if request.POST:
+        titulo = request.POST.get('titulo')
+        descricao = request.POST.get('descricao')
+        data_evento = request.POST.get('data_evento')
+        usuario = request.user # Aula 04: Obtendo o usuário logado para associar o evento a ele
+
+        # Método 1: Criando o evento e salvando em duas etapas
+        # evento = Evento(titulo=titulo, descricao=descricao, data_evento=data_evento, usuario=usuario)
+        # evento.save() # Aula 04: Salvando o evento no banco de dados
+
+        # Método 2:  Aula 04: Criando o evento e salvando em uma única etapa
+        Evento.objects.create(titulo=titulo, 
+                            descricao=descricao, 
+                            data_evento=data_evento, 
+                            usuario=usuario)
+
+    return redirect('/')
