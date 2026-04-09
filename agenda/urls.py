@@ -25,4 +25,7 @@ urlpatterns = [
     path('agenda/', views.lista_eventos),
     # path('', views.index), # Aula 03: Rota para a página inicial do site
     path('', RedirectView.as_view(url='/agenda/')), # Aula 03: Redirecionando para a página de agenda
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login), # Aula 04: Rota para processar o login do usuário
+    path('logout/', views.logout_user), # Aula 04: Rota para processar o logout do usuário
 ]

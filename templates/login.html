@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login</h1>
+
+    <!-- Aula 04: Criando um formulário de login simples -->
+    <form action="submit" method="POST"> {% csrf_token %}
+        <!-- Aula 04: Incluindo o token CSRF para proteger o formulário contra ataques de falsificação de solicitação entre sites -->
+        <div align="center">
+            <label>Usuário:</label>
+            <input type="text" name="username">
+            <label>Password:</label>
+            <input type="password" name="password">
+            <button type="submit">Entrar</button>
+        </div>
+    </form>
+
+    {% for message in messages %}
+    <div align="center">
+        <!-- Aula 04: Percorrendo a lista de mensagens de erro ou sucesso e exibindo cada uma delas -->
+        <strong>Erro: </strong>{{ message }}
+    </div>
+    {% endfor %}
+
+</body>
+</html>
