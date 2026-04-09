@@ -8,6 +8,7 @@ class Evento(models.Model): # Aula 02
     descricao = models.TextField(blank=True, null=True)
     data_evento = models.DateTimeField(verbose_name='Data do Evento')
     data_criacao = models.DateTimeField(auto_now=True)
+    local = models.CharField(max_length=100, blank=True, null=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # O nome da tabela será "evento" e não "core_evento"
