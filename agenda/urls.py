@@ -25,6 +25,7 @@ urlpatterns = [
     path('agenda/', views.lista_eventos),
     path('agenda/evento/', views.evento), # Aula 04: Rota para a página de cadastro de eventos
     path('agenda/evento/submit', views.submit_evento), # Aula 04: Rota para processar o cadastro de eventos
+    path('agenda/evento/delete/<int:id_evento>/', views.delete_evento), # Aula 05: Rota para excluir um evento
     # path('', views.index), # Aula 03: Rota para a página inicial do site
     path('', RedirectView.as_view(url='/agenda/')), # Aula 03: Redirecionando para a página de agenda
     path('login/', views.login_user),
