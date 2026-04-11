@@ -11,9 +11,12 @@
 <ul style="font-size: 18px">
     {% for evento in eventos %} <!-- Aula 3: Percorrendo a lista de eventos e exibindo o título e a data de cada um -->
     <li>
-        {{ evento.titulo }} - {{ evento.get_data_evento }}
-        ( <a href="evento/?id={{ evento.id }}">Editar</a> <!-- Aqui ele passou o ID como parâmento no GET-->
-        / <a href="evento/delete/{{ evento.id }}/">Excluir</a> )
+        <div {% if evento.get_evento_atrasado %} style="color: red" {% endif %}>
+            <!-- Aula 5: Verificando se o evento está atrasado e, se estiver, exibindo o título em vermelho -->
+            {{ evento.titulo }} - {{ evento.get_data_evento }}
+            ( <a href="evento/?id={{ evento.id }}">Editar</a> <!-- Aqui ele passou o ID como parâmento no GET-->
+            / <a href="evento/delete/{{ evento.id }}/">Excluir</a> )
+        </div>
     </li>
     {% endfor %}
 </ul>
