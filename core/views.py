@@ -3,7 +3,7 @@ from core.models import Evento # Aula 02-EX
 from django.contrib.auth.decorators import login_required # Aula 04: Importando o decorator login_required para proteger as views de eventos
 from django.contrib.auth import authenticate, login, logout # Aula 04: Importando as funções authenticate, login e logout para processar o login e logout do usuário
 from django.contrib import messages # Aula 04: Importando o módulo messages para exibir mensagens de erro ou sucesso para o usuário
-from datetime import datetime, timedelta # Aula 05: Importando o módulo datetime para obter a data atual e comparar com a data dos eventos
+from datetime import datetime, timedelta, timezone # Aula 05: Importando o módulo datetime para obter a data atual e comparar com a data dos eventos
 from django.http.response import Http404, JsonResponse # Aula 05
 from django.contrib.auth.models import User # Aula 05: Importando o modelo User para obter os usuários do sistema e filtrar os eventos por usuário
 
@@ -69,8 +69,8 @@ def lista_eventos(request): # Aula 03: Obtendo todos os eventos do banco de dado
     # lista_eventos = Evento.objects.all() # Aula 03: .all retorna uma lista de objetos do tipo Evento
     usuario = request.user # Aula 03: Obtendo o usuário logado
     data_atual = datetime.now() - timedelta(hours=1) # Aula 05: Obtendo a data atual e subtraindo 1 hora para incluir eventos que venceram faz 1 hora
-    lista_eventos = Evento.objects.filter(usuario=usuario,)
-                                        #data_evento__gt=data_atual) # gt = greater than, ou seja, eventos com data maior que a data atual, ou seja, eventos futuros
+    lista_eventos = Evento.objects.filter(usuario=usuario,
+                                        data_evento__gt=data_atual) # gt = greater than, ou seja, eventos com data maior que a data atual, ou seja, eventos futuros
     dados = {'eventos': lista_eventos}
     return render(request, 'agenda.html', dados)
 
@@ -144,3 +144,11 @@ def json_lista_eventos(request, id_usuario): # Aula 05: Criando a view para reto
     usuario = User.objects.get(id=id_usuario) # Aula 05: Obtendo o usuário pelo ID para filtrar os eventos daquele usuário
     evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
     return JsonResponse(list(evento), safe=False) # Tem que ter o 'safe' porque estou passando uma lista de eventos e não um dicionário, que é o formato padrão esperado pelo JsonResponse
+
+# Aula 05-EX: Criando a view para exibir o histórico de eventos, ou seja, os eventos que já passaram
+@login_required(login_url='/login/')
+def historico_eventos(request):
+    usuario = request.user
+    eventos = Evento.objects.filter(usuario=usuario, 
+                                data_evento__lt=datetime.now()).order_by('data_evento')
+    return render(request, 'historico.html', {'eventos': eventos})

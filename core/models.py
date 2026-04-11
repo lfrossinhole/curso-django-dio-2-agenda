@@ -31,3 +31,10 @@ class Evento(models.Model): # Aula 02
             return True
         else:
             return False
+    
+    # Modulo 05 - Faz um evento que está vencendo (faltando 1 hora para o evento) ficar amarelo
+    def get_evento_vencendo(self):
+        if self.data_evento < datetime.now() + timedelta(hours=1):
+            return True
+        else:
+            return False
