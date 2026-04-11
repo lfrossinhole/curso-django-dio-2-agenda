@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('eventos/<str:titulo_evento>/', views.detalhes_evento),
     path('agenda/', views.lista_eventos),
+    path('agenda/lista/<int:id_usuario>/', views.json_lista_eventos), # Aula 05: Rota para retornar a lista de eventos em formato JSON
     path('agenda/evento/', views.evento), # Aula 04: Rota para a página de cadastro de eventos
     path('agenda/evento/submit', views.submit_evento), # Aula 04: Rota para processar o cadastro de eventos
     path('agenda/evento/delete/<int:id_evento>/', views.delete_evento), # Aula 05: Rota para excluir um evento

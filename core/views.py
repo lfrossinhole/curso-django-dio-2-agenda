@@ -3,6 +3,9 @@ from core.models import Evento # Aula 02-EX
 from django.contrib.auth.decorators import login_required # Aula 04: Importando o decorator login_required para proteger as views de eventos
 from django.contrib.auth import authenticate, login, logout # Aula 04: Importando as funções authenticate, login e logout para processar o login e logout do usuário
 from django.contrib import messages # Aula 04: Importando o módulo messages para exibir mensagens de erro ou sucesso para o usuário
+from datetime import datetime, timedelta # Aula 05: Importando o módulo datetime para obter a data atual e comparar com a data dos eventos
+from django.http.response import Http404, JsonResponse # Aula 05
+from django.contrib.auth.models import User # Aula 05: Importando o modelo User para obter os usuários do sistema e filtrar os eventos por usuário
 
 # Create your views here.
 
@@ -65,7 +68,9 @@ def submit_login(request):
 def lista_eventos(request): # Aula 03: Obtendo todos os eventos do banco de dados
     # lista_eventos = Evento.objects.all() # Aula 03: .all retorna uma lista de objetos do tipo Evento
     usuario = request.user # Aula 03: Obtendo o usuário logado
-    lista_eventos = Evento.objects.filter(usuario=usuario) # Aula 03: .filter retorna uma lista de objetos do tipo Evento filtrados pelo usuário logado
+    data_atual = datetime.now() - timedelta(hours=1) # Aula 05: Obtendo a data atual e subtraindo 1 hora para incluir eventos que venceram faz 1 hora
+    lista_eventos = Evento.objects.filter(usuario=usuario,)
+                                        #data_evento__gt=data_atual) # gt = greater than, ou seja, eventos com data maior que a data atual, ou seja, eventos futuros
     dados = {'eventos': lista_eventos}
     return render(request, 'agenda.html', dados)
 
@@ -121,10 +126,21 @@ def submit_evento(request): # Aula 04: Criando a view para processar o cadastro 
 @login_required(login_url='/login/')
 def delete_evento(request, id_evento): # Aula 05: Criando a view para excluir um evento
     usuario = request.user # Aula 05: Obtendo o usuário logado para verificar se ele é o dono do evento
-    evento = Evento.objects.get(id=id_evento) # Aula 05: Obtendo o evento pelo ID
+    try:
+        evento = Evento.objects.get(id=id_evento) # Aula 05: Obtendo o evento pelo ID
+    except Exception:
+        raise Http404() # Aula 05: Se o evento não for encontrado, ele levanta um erro 404 para indicar que o recurso não foi encontrado
     if usuario == evento.usuario: # Aula 05: Verificando se o usuário logado é o dono do evento
         evento.delete() # Aula 05: Excluindo o evento do banco de dados usando o método delete do objeto evento
-    
+    else:
+        raise Http404() # Aula 05: Se o usuário logado não for o dono do evento, ele levanta um erro 404 para indicar que o recurso não foi encontrado, ou seja, o evento não existe para aquele usuário
+
     # Não usou esse método, porque ele não verifica se o usuário logado é o dono do evento, e pode excluir eventos de outros usuários
     # Evento.objects.filter(id=id_evento).delete() # Aula 05: Excluindo o evento do banco de dados usando o método filter e delete
     return redirect('/')
+
+@login_required(login_url='/login/') # Aula 05: Protegendo a view de lista de eventos para que apenas usuários logados possam acessá-la
+def json_lista_eventos(request, id_usuario): # Aula 05: Criando a view para retornar a lista de eventos em formato JSON
+    usuario = User.objects.get(id=id_usuario) # Aula 05: Obtendo o usuário pelo ID para filtrar os eventos daquele usuário
+    evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
+    return JsonResponse(list(evento), safe=False) # Tem que ter o 'safe' porque estou passando uma lista de eventos e não um dicionário, que é o formato padrão esperado pelo JsonResponse
