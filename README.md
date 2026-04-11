@@ -1,4 +1,3 @@
-markdown
 # 📘 Agenda de Eventos – Projeto Django
 
 Este projeto foi desenvolvido como parte do curso de **Django da plataforma DIO (Digital Innovation One)**, no qual foram explorados os conceitos fundamentais do framework e construído um sistema completo de agenda de eventos com autenticação, inserção, edição, exclusão e exibição dinâmica de dados.
