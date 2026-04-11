@@ -1,17 +1,18 @@
 {% extends "model-page.html" %}
 
 {% block content %}
-<h2>Histórico de Eventos</h2>
+<h2 class="page-title">Histórico de Eventos</h2>
 
-<a href="../">
-    <button type="button">Voltar</button>
-</a>
-<ul style="font-size: 18px">
-    {% for evento in eventos %} <!-- Aula 3: Percorrendo a lista de eventos e exibindo o título e a data de cada um -->
-    <li>
-            <!-- Aula 5: Verificando se o evento está atrasado e, se estiver, exibindo o título em vermelho -->
-            {{ evento.titulo }} - {{ evento.get_data_evento }}
+<div class="actions-row">
+    <a href="../" class="btn pastel-gray">Voltar</a>
+</div>
+
+<ul class="event-list">
+    {% for evento in eventos %}
+    <li class="event-item">
+        {{ evento.titulo }} — {{ evento.get_data_evento }}
     </li>
     {% endfor %}
 </ul>
+
 {% endblock %}

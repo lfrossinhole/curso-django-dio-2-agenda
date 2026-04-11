@@ -1,29 +1,31 @@
-<!-- Aula 3: Estendendo o template model-page.html para reutilizar o código do cabeçalho e rodapé da página -->
 {% extends "model-page.html" %}
 
-<!-- Aula 3: Preenchendo o bloco de conteúdo definido no template model-page.html -->
 {% block content %}
-<h2>Agendamentos</h2>
+<h2 class="page-title">Agendamentos</h2>
 
-<a href="evento/">
-    <button type="button">Novo Evento</button>
-</a>
-<a href="historico/">
-    <button type="button">Histórico</button>
-</a>
-<ul style="font-size: 18px">
-    {% for evento in eventos %} <!-- Aula 3: Percorrendo a lista de eventos e exibindo o título e a data de cada um -->
-    <li>
-        <div 
-        {% if evento.get_evento_atrasado %} style="color: red" {% endif %}
-        {% if evento.get_evento_vencendo %} style="color: orange" {% endif %}
-        >
-            <!-- Aula 5: Verificando se o evento está atrasado e, se estiver, exibindo o título em vermelho -->
-            {{ evento.titulo }} - {{ evento.get_data_evento }}
-            ( <a href="evento/?id={{ evento.id }}">Editar</a> <!-- Aqui ele passou o ID como parâmento no GET-->
-            / <a href="evento/delete/{{ evento.id }}/">Excluir</a> )
-        </div>
+<div class="actions-row">
+    <a href="evento/" class="btn pastel-blue">Novo Evento</a>
+    <a href="historico/" class="btn pastel-purple">Histórico</a>
+</div>
+
+<ul class="event-list">
+    {% for evento in eventos %}
+    <li class="event-item 
+        {% if evento.get_evento_atrasado %} 
+            event-late
+        {% elif evento.get_evento_vencendo %} 
+            event-warning 
+        {% endif %}
+    ">
+        <span>{{ evento.titulo }} – {{ evento.get_data_evento }}</span>
+
+        <span class="event-actions">
+            <a href="evento/?id={{ evento.id }}" class="link-edit">Editar</a>
+            <span>/</span>
+            <a href="evento/delete/{{ evento.id }}/" class="link-delete">Excluir</a>
+        </span>
     </li>
     {% endfor %}
 </ul>
+
 {% endblock %}

@@ -1,32 +1,33 @@
 {% extends "model-page.html" %}
 
 {% block content %}
-<h2>Cadastro de Evento</h2>
+<h2 class="page-title">Cadastro de Evento</h2>
 
-<form action="submit" method="POST">
-    {% csrf_token %} <!-- Aula 04: Incluindo o token CSRF para proteger o formulário contra ataques de falsificação de solicitação entre sites -->
-    <label>Título:</label>
-    <input type="number" name="id_evento" value="{{ evento.id }}" hidden> <!-- Aula 05: Campo oculto para armazenar o ID do evento a ser editado -->
-    <br>
-    <input type="text" name="titulo" size="23" value="{{ evento.titulo }}">
-    <br>
-    <label>Data do Evento:</label>
-    <br>
-    <input type="datetime-local" name="data_evento" value="{{ evento.get_data_input_evento }}">
-    <br>
-    <label>Descrição:</label>
-    <br>
-    <textarea name="descricao" rows="5" cols="24">{{ evento.descricao }}</textarea>
-    <br>
-    <!-- Aula 04-EX: Adição do campo "Local", que pode ser branco ou nulo -->
-    <label>Local do Evento:</label>
-    <br>
-    <input type="text" name="local" size="23" value="{{ evento.local }}">
-    <br><br>
-    <button type="submit">Salvar</button>
-    <a href="/">
-        <button type="button">Cancelar</button>
-    </a>
-</form>
+<div class="form-card">
+
+    <form action="submit" method="POST" class="form-default">
+        {% csrf_token %}
+
+        <input type="hidden" name="id_evento" value="{{ evento.id }}">
+
+        <label>Título:</label>
+        <input type="text" name="titulo" value="{{ evento.titulo }}" required>
+
+        <label>Data do Evento:</label>
+        <input type="datetime-local" name="data_evento" value="{{ evento.get_data_input_evento }}" required>
+
+        <label>Descrição:</label>
+        <textarea name="descricao" rows="5">{{ evento.descricao }}</textarea>
+
+        <label>Local do Evento:</label>
+        <input type="text" name="local" value="{{ evento.local }}">
+
+        <div class="actions-row mt-20">
+            <button type="submit" class="btn pastel-blue">Salvar</button>
+            <a href="/" class="btn pastel-gray">Cancelar</a>
+        </div>
+
+    </form>
+</div>
 
 {% endblock %}

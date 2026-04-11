@@ -1,0 +1,266 @@
+/* =======================
+   ESTILO GERAL
+======================= */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: #f7f7f7;
+}
+
+/* =======================
+   TELA DE LOGIN
+======================= */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 40px 35px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+
+    /* Tons pastéis suaves */
+    border-top: 6px solid #c9dfff;   /* azul pastel */
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #6a6a6a;
+}
+
+/* Formulário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #777;
+    font-size: 14px;
+}
+
+.login-form input {
+    padding: 12px;
+    border: 2px solid #dce7ff;
+    border-radius: 8px;
+    outline: none;
+    transition: .2s;
+    font-size: 14px;
+}
+
+.login-form input:focus {
+    border-color: #a9c6ff;
+}
+
+/* Botão */
+.btn-login {
+    margin-top: 20px;
+    padding: 12px;
+    background: #b7d4ff;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-login:hover {
+    background: #9fc6ff;
+}
+
+/* Erros */
+.message-error {
+    margin-top: 20px;
+    background: #ffe0e0;
+    padding: 12px;
+    border-radius: 8px;
+    color: #b30000;
+    text-align: center;
+    border-left: 4px solid #ff9b9b;
+}
+
+/* =======================
+   HEADER
+======================= */
+
+.header {
+    width: 100%;
+    background: #dceeff; /* azul pastel */
+    padding: 20px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #b7d4ff;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 26px;
+    color: #5a5a5a;
+}
+
+.header-nav a.logout-btn {
+    background: #ffbebe;
+    color: #6a0000;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.header-nav a.logout-btn:hover {
+    background: #ff9c9c;
+}
+
+/* =======================
+   PÁGINA BASE
+======================= */
+
+.page-body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #f0f0f0;
+    color: #777;
+    border-top: 3px solid #dcdcdc;
+    font-size: 14px;
+}
+
+/* =======================
+   TÍTULOS E ESTRUTURA
+======================= */
+.page-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* =======================
+   BOTÕES
+======================= */
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.2s;
+}
+
+.pastel-blue { background: #b7d4ff; }
+.pastel-blue:hover { background: #9fc6ff; }
+
+.pastel-purple { background: #d8caff; }
+.pastel-purple:hover { background: #cbb9ff; }
+
+.pastel-gray { background: #cccccc; }
+.pastel-gray:hover { background: #b7b7b7; }
+
+/* linha de botões */
+.actions-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* =======================
+   LISTA DE EVENTOS
+======================= */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.event-item {
+    background: #ffffff;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-late { border-left: 5px solid #ff9b9b; }
+.event-warning { border-left: 5px solid #ffd18a; }
+
+.event-actions a {
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.link-edit { color: #6a6a6a; }
+.link-edit:hover { text-decoration: underline; }
+
+.link-delete { color: #b30000; }
+.link-delete:hover { text-decoration: underline; }
+
+/* =======================
+   FORMULÁRIOS
+======================= */
+.form-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+}
+
+.form-default {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-default label {
+    margin-top: 12px;
+    margin-bottom: 5px;
+    color: #777;
+}
+
+.form-default input,
+.form-default textarea {
+    padding: 10px;
+    border: 2px solid #dce7ff;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: .2s;
+}
+
+.form-default input:focus,
+.form-default textarea:focus {
+    border-color: #a9c6ff;
+}
+
+.mt-20 { margin-top: 20px; }

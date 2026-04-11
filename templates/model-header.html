@@ -1,9 +1,21 @@
+<!-- model-header.html -->
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda</title>
-    
-    <div align="right">
-        <a href="/logout">logout</a>
-    </div>
-    <h1>Agenda</h1>
+{% load static %}
+
+<!-- Metadados -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- CSS Global -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<title>Agenda</title>
+
+<!-- Header visual -->
+<header class="header">
+    <h1 class="header-title">Agenda</h1>
+
+    <nav class="header-nav">
+        <a href="/logout" class="logout-btn">Sair</a>
+    </nav>
+</header>

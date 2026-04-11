@@ -3,29 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <h1>Login</h1>
 
-    <!-- Aula 04: Criando um formulário de login simples -->
-    <form action="submit" method="POST"> {% csrf_token %}
-        <!-- Aula 04: Incluindo o token CSRF para proteger o formulário contra ataques de falsificação de solicitação entre sites -->
-        <div align="center">
-            <label>Usuário:</label>
-            <input type="text" name="username">
-            <label>Password:</label>
-            <input type="password" name="password">
-            <button type="submit">Entrar</button>
+<body class="login-body">
+
+    <div class="login-container">
+
+        <h1 class="login-title">Login</h1>
+
+        <form action="submit" method="POST" class="login-form">
+            {% csrf_token %}
+
+            <label>Usuário</label>
+            <input type="text" name="username" placeholder="Digite seu usuário">
+
+            <label>Senha</label>
+            <input type="password" name="password" placeholder="Digite sua senha">
+
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
+
+        {% for message in messages %}
+        <div class="message-error">
+            <strong>Erro:</strong> {{ message }}
         </div>
-    </form>
+        {% endfor %}
 
-    {% for message in messages %}
-    <div align="center">
-        <!-- Aula 04: Percorrendo a lista de mensagens de erro ou sucesso e exibindo cada uma delas -->
-        <strong>Erro: </strong>{{ message }}
     </div>
-    {% endfor %}
 
 </body>
 </html>
